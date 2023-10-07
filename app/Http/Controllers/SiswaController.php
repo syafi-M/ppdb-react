@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SiswaCollection;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,9 +12,18 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('query');
+
+        $results = Siswa::search($searchQuery)->get();
+
+        return response()->json($results);
+    }
+    public function index(Request $request)
     {
         $siswa = Siswa::all();
+        
         return Inertia::render('Siswa/IndexSiswa', compact('siswa'));
     }
 

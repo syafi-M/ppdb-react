@@ -34,7 +34,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/siswa', SiswaController::class);  
+    Route::resource('/siswa', SiswaController::class);
+    ROute::get('search', [SiswaController::class, "search"]);
     Route::resource('/jurusan', JurusanController::class);  
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

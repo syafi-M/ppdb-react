@@ -1,4 +1,6 @@
 import { Head, Link, usePage } from "@inertiajs/react";
+import bgBiru from "@/../../public/logo/bg-biru.jpg";
+import pemkab from "@/../../public/logo/pemkab.png";
 
 export default function Welcome(props) {
     const { canLogin, canRegister, tahun } = usePage().props;
@@ -6,12 +8,15 @@ export default function Welcome(props) {
     return (
         <div className="min-h-screen antialiased">
             <Head title="Selamat Datang" />
-            <div className="bg-[url('../logo/bg-biru.jpg')] h-screen bg-cover">
+            <div
+                style={{ backgroundImage: `url(${bgBiru})` }}
+                className="h-screen bg-cover"
+            >
                 <div className="bg-slate-50 py-4 w-full shadow-md rounded-b-md top-0">
                     <p className="mx-4 text-slate-800 font-semibold flex items-center gap-2">
                         <span>
                             <img
-                                src="../logo/pemkab.png"
+                                src={pemkab}
                                 alt=""
                                 srcSet=""
                                 className="w-10 "
