@@ -22,9 +22,12 @@ class SiswaController extends Controller
     }
     public function index(Request $request)
     {
-        $siswa = Siswa::all();
+        $siswa = Siswa::latest()->paginate(5);
+        // dd($siswa);
         
-        return Inertia::render('Siswa/IndexSiswa', compact('siswa'));
+        return Inertia::render('Siswa/IndexSiswa', [
+            'siswas' => $siswa,
+        ]);
     }
 
     /**
