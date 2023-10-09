@@ -1,4 +1,5 @@
 import MainDiv from "@/Components/MainDiv";
+import Paginator from "@/Components/Paginator";
 import SearchBar from "@/Components/SearchBar";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
@@ -10,9 +11,12 @@ export default function IndexSiswa(props) {
     const [results, setResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
 
+    const [currentPage, setCurrentPage] = useState(props.siswas.current_page);
+    const itemPerPage = props.siswas.per_page;
+
     const displayData = query ? results : props.siswas.data;
 
-    // console.log(props.siswas.data);
+    console.log(props.siswas);
 
     useEffect(() => {
         query;
@@ -88,6 +92,7 @@ export default function IndexSiswa(props) {
                                 </tbody>
                             </table>
                         </div>
+                        <Paginator page={props.siswas} />
                     </div>
                 </MainDiv>
             </Authenticated>

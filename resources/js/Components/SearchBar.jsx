@@ -20,7 +20,7 @@ export default function SearchBar({ link, query, setQuery, setResults }) {
     };
 
     // Debounce the search function
-    const debouncedSearch = debounce(performSearch, 1);
+    const debouncedSearch = debounce(performSearch, 500);
 
     // Handle search query changes
     useEffect(() => {
