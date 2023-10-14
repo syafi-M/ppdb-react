@@ -1,9 +1,21 @@
 import { Head, Link, usePage } from "@inertiajs/react";
 import bgBiru from "@/../../public/logo/bg-biru.jpg";
 import pemkab from "@/../../public/logo/pemkab.png";
+import { useState } from "react";
+import Modal from "@/Components/Modal";
 
 export default function Welcome(props) {
     const { canLogin, canRegister, tahun } = usePage().props;
+
+    const [login, setLogin] = useState(false);
+
+    const pencetLogin = () => {
+        setLogin(true);
+    };
+    const tutupLogin = () => {
+        setLogin(false);
+        reset();
+    };
 
     return (
         <div className="min-h-screen antialiased">
@@ -66,22 +78,44 @@ export default function Welcome(props) {
                                         Dashboard
                                     </Link>
                                 ) : (
-                                    <>
-                                        <Link
-                                            href={route("login")}
+                                    <div>
+                                        <button
+                                            onClick={pencetLogin}
                                             className="px-4 py-2 rounded bg-sky-400 font-semibold text-slate-50 shadow-md hover:bg-sky-500 hover:text-slate-100 transition .2s ease-in-out"
                                         >
-                                            Log in
-                                        </Link>
-                                        {canRegister && (
-                                            <Link
-                                                href={route("register")}
-                                                className="px-4 py-2 rounded bg-teal-400 font-semibold text-slate-50 shadow-md hover:bg-teal-500 hover:text-slate-100 transition .2s ease-in-out"
-                                            >
-                                                Daftar
-                                            </Link>
-                                        )}
-                                    </>
+                                            Login
+                                        </button>
+                                        <Modal
+                                            show={login}
+                                            onClose={tutupLogin}
+                                        >
+                                            <span className="flex justify-end pt-4 pr-4">
+                                                <button
+                                                    onClick={tutupLogin}
+                                                    className="text-2xl btn btn-error"
+                                                >
+                                                    &times;
+                                                </button>
+                                            </span>
+                                            <p className=" text-center font-semibold text-lg">
+                                                Pilih Login
+                                            </p>
+                                            <span className="p-4 flex gap-2 justify-center">
+                                                <Link
+                                                    href={route("login")}
+                                                    className="px-4 py-2 rounded bg-sky-400 font-semibold text-slate-50 shadow-md hover:bg-sky-500 hover:text-slate-100 transition .2s ease-in-out"
+                                                >
+                                                    Log in Sebagai Admin
+                                                </Link>
+                                                <Link
+                                                    href={route("login-siswa")}
+                                                    className="px-4 py-2 rounded bg-sky-400 font-semibold text-slate-50 shadow-md hover:bg-sky-500 hover:text-slate-100 transition .2s ease-in-out"
+                                                >
+                                                    Log in Sebagai Siswa
+                                                </Link>
+                                            </span>
+                                        </Modal>
+                                    </div>
                                 )}
                             </div>
                         ) : null}

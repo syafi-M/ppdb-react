@@ -6,8 +6,7 @@ import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -25,7 +24,7 @@ export default function Login({ status, canResetPassword }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("login"), {
+        post(route("login-siswa"), {
             onSuccess: () => {
                 toast.success("Selamat Datang", {
                     autoClose: 2000,
@@ -33,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
             },
         });
     };
-    const testoast = () => toast.success("tes toast bagn");
+    // console.log(data);
 
     return (
         <GuestLayout>
@@ -41,9 +40,6 @@ export default function Login({ status, canResetPassword }) {
             <p className="text-center text-2xl mb-5 font-semibold">
                 Halaman Login
             </p>
-            <button onClick={testoast} className="btn btn-info">
-                tes
-            </button>
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
@@ -53,7 +49,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Nama" />
+                    <InputLabel htmlFor="name" value="Nama Lengkap" />
 
                     <TextInput
                         id="name"
@@ -61,7 +57,7 @@ export default function Login({ status, canResetPassword }) {
                         name="name"
                         value={data.name}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="name"
                         isFocused={true}
                         onChange={(e) => setData("name", e.target.value)}
                     />

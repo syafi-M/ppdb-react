@@ -1,6 +1,13 @@
+import { method } from "lodash";
 import NavLink from "./NavLink";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function NavBar({ user }) {
+    const logout = (e) => {
+        e.preventDefault();
+
+        post(route("logout"));
+    };
     return (
         <div>
             <div className="bg-slate-50 py-3 fixed top-0 w-full shadow z-[10]">
@@ -38,15 +45,14 @@ export default function NavBar({ user }) {
                                 </NavLink>
                             </div>
                         )}
-
-                        <a
+                        <Link
                             href={route("logout")}
-                            method="post"
-                            as="Button"
+                            as="button"
+                            method="POST"
                             className="bg-amber-400/90 hover:bg-amber-500 ring-2 ring-amber-500/70 hover:border-0 border-b-2 shadow font-semibold transition duration-150 ease-in-out border-none rounded-md px-2 py-1"
                         >
                             Log out
-                        </a>
+                        </Link>
                     </div>
                 </nav>
             </div>

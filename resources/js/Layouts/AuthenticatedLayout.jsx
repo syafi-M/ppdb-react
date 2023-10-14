@@ -3,15 +3,16 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import NavBar from "@/Components/NavBar";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Authenticated({ user, header, children }) {
-    const [showingNavigationDropdown, setShowingNavigationDropdown] =
-        useState(false);
+export default function Authenticated({ header, children, title }) {
+    const { user } = usePage().props.auth;
 
     return (
         <div className="min-h-screen bg-gray-100">
+            <Head title={title} />
             <div>
                 <NavBar user={user} />
             </div>

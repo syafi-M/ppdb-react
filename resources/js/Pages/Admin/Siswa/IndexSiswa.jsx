@@ -2,21 +2,23 @@ import MainDiv from "@/Components/MainDiv";
 import Paginator from "@/Components/Paginator";
 import SearchBar from "@/Components/SearchBar";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 import _, { debounce, result } from "lodash";
 import { useEffect, useState } from "react";
 
-export default function IndexSiswa(props) {
+export default function IndexSiswa({ siswas }) {
+    const { auth } = usePage().props;
+
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [showResults, setShowResults] = useState(false);
 
-    const [currentPage, setCurrentPage] = useState(props.siswas.current_page);
-    const itemPerPage = props.siswas.per_page;
+    const [currentPage, setCurrentPage] = useState(siswas.current_page);
+    const itemPerPage = siswas.per_page;
 
-    const displayData = query ? results : props.siswas.data;
+    const displayData = query ? results : siswas.data;
 
-    console.log(props.siswas);
+    // console.log(siswas);
 
     useEffect(() => {
         query;
@@ -25,7 +27,7 @@ export default function IndexSiswa(props) {
     return (
         <div>
             <Head title="Index Siswa" />
-            <Authenticated user={props.auth.user}>
+            <Authenticated user={auth.user}>
                 <MainDiv subtitle={"Index Siswa"}>
                     <div className="flex justify-between mx-10">
                         <span>
@@ -92,7 +94,7 @@ export default function IndexSiswa(props) {
                                 </tbody>
                             </table>
                         </div>
-                        <Paginator page={props.siswas} />
+                        <Paginator page={siswas} />
                     </div>
                 </MainDiv>
             </Authenticated>
