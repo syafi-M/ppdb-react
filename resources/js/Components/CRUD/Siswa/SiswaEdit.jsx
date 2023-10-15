@@ -18,7 +18,7 @@ export default function SiswaEdit({ jurusan, siswa }) {
         alamat_wali: siswa.alamat_wali,
         domisili: siswa.domisili,
         no_aktif: siswa.no_aktif,
-        jurusan_id: siswa.jurusan_id !== null ? siswa.jurusan_id : "",
+        jurusan_id: siswa.jurusan_id ? siswa.jurusan_id : null,
     });
 
     const submit = (e) => {
