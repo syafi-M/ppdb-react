@@ -1,10 +1,18 @@
 import MainDiv from "@/Components/MainDiv";
 import Paginator from "@/Components/Paginator";
 import SearchBar from "@/Components/SearchBar";
+import AdminLayout from "@/Layouts/AdminLayout";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import _, { debounce, result } from "lodash";
 import { useEffect, useState } from "react";
+import {
+    RiDeleteBin2Line,
+    RiDeleteBin3Fill,
+    RiDeleteBin3Line,
+    RiEdit2Line,
+    RiInformationLine,
+} from "react-icons/ri";
 
 export default function IndexSiswa({ siswas }) {
     const { auth } = usePage().props;
@@ -26,19 +34,9 @@ export default function IndexSiswa({ siswas }) {
 
     return (
         <div>
-            <Head title="Index Siswa" />
-            <Authenticated user={auth.user}>
-                <MainDiv subtitle={"Index Siswa"}>
-                    <div className="flex justify-between mx-10">
-                        <span>
-                            <a
-                                href={route("dashboard")}
-                                className="btn btn-warning"
-                            >
-                                Kembali
-                            </a>
-                        </span>
-
+            <AdminLayout title={"Index Siswa"}>
+                <MainDiv subtitle={"Index Siswa"} className={"-top-10"}>
+                    <div className="flex justify-end mx-10">
                         <SearchBar
                             link={"search"}
                             query={query}
@@ -65,8 +63,11 @@ export default function IndexSiswa({ siswas }) {
                                             Nomor Telepon
                                         </th>
                                         <th className="bg-cyan-400">Alamat</th>
-                                        <th className="bg-cyan-400 rounded-tr-lg">
+                                        <th className="bg-cyan-400 px-11 ">
                                             Status
+                                        </th>
+                                        <th className="bg-cyan-400 rounded-tr-lg">
+                                            Aksi
                                         </th>
                                     </tr>
                                 </thead>
@@ -78,7 +79,48 @@ export default function IndexSiswa({ siswas }) {
                                             <td>{sis.nisn}</td>
                                             <td>{sis.no_aktif}</td>
                                             <td>{sis.alamat_siswa}</td>
-                                            <td>{sis.status}</td>
+                                            {sis.status == "daftar ulang" ? (
+                                                <td className=" flex items-center justify-center">
+                                                    <span className="badge badge-error my-2 text-center text-sm">
+                                                        {sis.status}
+                                                    </span>
+                                                </td>
+                                            ) : (
+                                                <td className="badge badge-success text-center flex items-center justify-center">
+                                                    {sis.status}
+                                                </td>
+                                            )}
+                                            <td>
+                                                <span className="join gap-1">
+                                                    <Link
+                                                        href={route(
+                                                            "siswa.show",
+                                                            sis
+                                                        )}
+                                                        className="join-item btn btn-xs rounded-full btn-info"
+                                                    >
+                                                        <RiInformationLine className="text-lg" />
+                                                    </Link>
+                                                    <Link
+                                                        href={route(
+                                                            "siswa.edit",
+                                                            sis.id
+                                                        )}
+                                                        method="get"
+                                                        className="join-item btn btn-xs rounded-full btn-warning"
+                                                    >
+                                                        <RiEdit2Line className="text-lg" />
+                                                    </Link>
+                                                    <Link
+                                                        href={route(
+                                                            "siswa.index"
+                                                        )}
+                                                        className="join-item btn btn-xs rounded-full btn-error"
+                                                    >
+                                                        <RiDeleteBin2Line className="text-lg" />
+                                                    </Link>
+                                                </span>
+                                            </td>
                                         </tr>
                                     ))}
                                     {displayData.length == 0 && (
@@ -94,10 +136,12 @@ export default function IndexSiswa({ siswas }) {
                                 </tbody>
                             </table>
                         </div>
-                        <Paginator page={siswas} />
+                        {!query && displayData.length != 0 && (
+                            <Paginator page={siswas} />
+                        )}
                     </div>
                 </MainDiv>
-            </Authenticated>
+            </AdminLayout>
         </div>
     );
 }

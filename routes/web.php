@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
@@ -34,9 +35,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified', 'checkRole'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/siswa', SiswaController::class);
     ROute::get('search', [SiswaController::class, "search"]);
-    Route::resource('/jurusan', JurusanController::class);  
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -44,9 +43,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('admin', 'auth')->group(function () {
-    Route::get('/admin', function () {
-        return Inertia::render("Admin/IndexAdmin");
-    })->name('indexAdmin');
+    Route::get('/admin', [AdminController::class, 'indexAdmin'])->name('indexAdmin');
+    Route::resource('/siswa', SiswaController::class);
+    Route::resource('/jurusan', JurusanController::class);  
+
+
     
 });
 

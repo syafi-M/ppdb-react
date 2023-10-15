@@ -22,15 +22,16 @@ class SiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => 'nullable',
             'fullname' => 'required',
             'nisn' => 'required',
             'nik' => 'required',
-            'no_telp' => 'string',
-            'asal_sekolah' => 'string',
+            'no_telp' => 'string|nullable',
+            'asal_sekolah' => 'string|nullable',
             'tinggal_bersama' => 'string',
-            'alamat_siswa' => 'string',
+            'alamat_siswa' => 'string|nullable',
             'nama_wali' => 'string',
-            'alamat_wali' => 'string',
+            'alamat_wali' => 'string|nullable',
             'domisili' => 'string',
             'no_aktif' => 'required',
             'jurusan_id' => 'required',

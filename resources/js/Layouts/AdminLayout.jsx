@@ -17,14 +17,14 @@ export default function AdminLayout({ children, title }) {
                         </span>
                     </div>
                 </div>
-                <div className=" mx-5 mt-5 flex justify-between gap-2">
+                <div className=" mx-5 py-5 flex justify-between gap-2">
                     <section className="w-1/4  bg-slate-50 rounded-l-xl rounded-r-sm">
                         <p className="text-center pt-3 font-semibold">
                             Menu - Menu Admin
                         </p>
                         <ul className="menu rounded-box">
                             <li>
-                                <details open>
+                                <details>
                                     <summary>Menu Siswa</summary>
                                     <ul>
                                         <li>
@@ -41,11 +41,27 @@ export default function AdminLayout({ children, title }) {
                                 </details>
                             </li>
                             <li>
-                                <a>Item 3</a>
+                                <details>
+                                    <summary>Menu Siswa</summary>
+                                    <ul>
+                                        <li>
+                                            <Link href={route("siswa.index")}>
+                                                Index Siswa
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link href={route("siswa.create")}>
+                                                Tambah Siswa
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </details>
                             </li>
                         </ul>
                     </section>
-                    <section className="w-3/4 bg-slate-50 rounded-r-xl rounded-l-sm"></section>
+                    <section className="w-3/4 bg-slate-50 rounded-r-xl rounded-l-sm">
+                        {children}
+                    </section>
                 </div>
             </Authenticated>
         </>

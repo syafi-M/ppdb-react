@@ -33,7 +33,6 @@ export default function Login({ status, canResetPassword }) {
             },
         });
     };
-    const testoast = () => toast.success("tes toast bagn");
 
     return (
         <GuestLayout>
@@ -41,9 +40,6 @@ export default function Login({ status, canResetPassword }) {
             <p className="text-center text-2xl mb-5 font-semibold">
                 Halaman Login
             </p>
-            <button onClick={testoast} className="btn btn-info">
-                tes
-            </button>
 
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">

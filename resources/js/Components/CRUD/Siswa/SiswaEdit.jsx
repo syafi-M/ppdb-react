@@ -5,27 +5,27 @@ import TextInput from "@/Components/TextInput";
 import { Link, useForm } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
-export default function SiswaCreate({ jurusan }) {
+export default function SiswaEdit({ jurusan, siswa }) {
     const { data, setData, processing, post, errors, reset } = useForm({
-        fullname: "",
-        nisn: "",
-        nik: "",
-        no_telp: "",
-        asal_sekolah: "",
-        tinggal_bersama: "",
-        alamat_siswa: "",
-        nama_wali: "",
-        alamat_wali: "",
-        domisili: "",
-        no_aktif: "",
-        jurusan_id: null,
+        fullname: siswa.fullname,
+        nisn: siswa.nisn,
+        nik: siswa.nik,
+        no_telp: siswa.no_telp,
+        asal_sekolah: siswa.asal_sekolah,
+        tinggal_bersama: siswa.tinggal_bersama,
+        alamat_siswa: siswa.alamat_siswa,
+        nama_wali: siswa.nama_wali,
+        alamat_wali: siswa.alamat_wali,
+        domisili: siswa.domisili,
+        no_aktif: siswa.no_aktif,
+        jurusan_id: siswa.jurusan_id !== null ? siswa.jurusan_id : "",
     });
 
     const submit = (e) => {
         e.preventDefault();
 
         post(
-            route("siswa.store", {
+            route("siswa.update", siswa.id, {
                 onSuccess: () => {
                     toast.success("Siswa Berhasil Ditambah", {
                         autoClose: 2000,

@@ -90,17 +90,25 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Siswa $siswa)
+    public function show($id)
     {
-        //
+        $siswas = Siswa::findOrFail($id);
+        return Inertia::render("Admin/Siswa/ShowSiswa", [
+            'siswa' => $siswas
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Siswa $siswa)
+    public function edit($id)
     {
-        //
+        $siswas = Siswa::findOrFail($id);
+        $jurusan = Jurusan::all();
+        return Inertia::render("Admin/Siswa/EditSiswa", [
+            'siswa' => $siswas, 
+            'jurusan' => $jurusan
+        ]);
     }
 
     /**

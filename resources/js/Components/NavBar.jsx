@@ -1,6 +1,7 @@
 import { method } from "lodash";
 import NavLink from "./NavLink";
 import { Link, usePage } from "@inertiajs/react";
+import logoPemkab from "@/../../public/logo/pemkab.png";
 
 export default function NavBar({ user }) {
     const logout = (e) => {
@@ -14,11 +15,7 @@ export default function NavBar({ user }) {
                 <nav className="flex justify-between items-center mx-10">
                     <div className="flex items-center gap-4 text-slate-800 font-semibold">
                         <span>
-                            <img
-                                src="../logo/pemkab.png"
-                                alt="logo"
-                                className="w-10"
-                            />
+                            <img src={logoPemkab} alt="logo" className="w-10" />
                         </span>
                         <p>{user.name}</p>
                     </div>
